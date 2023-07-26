@@ -42,7 +42,6 @@ public class Flib {
 		Row row = sheet.getRow(rowCount);
 		Cell cell = row.createCell(cellCount);
 		cell.setCellValue(data);
-		
 		FileOutputStream fos = new FileOutputStream(excelPath);
 		wb.write(fos);
 	}

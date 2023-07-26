@@ -1,6 +1,7 @@
 package designKeyWordDrivenFramework;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -40,15 +41,17 @@ public class FlibK {
 		return row;
 	}
 
-	public String writeExcelData(String ExcelPath, String SheetName, int rowCount, int cellCount)
+	public void writeExcelData(String ExcelPath, String SheetName, int rowCount, int cellCount, String data)
 			throws EncryptedDocumentException, IOException {
 		FileInputStream fis = new FileInputStream(ExcelPath);
 		Workbook workbook = WorkbookFactory.create(fis);
 		Sheet sheet = workbook.getSheet(SheetName);
 		Row row = sheet.getRow(rowCount);
 		Cell cell = row.getCell(cellCount);
-		String data = cell.getStringCellValue();
-		return data;
+		cell.setCellValue(data);
+
+		FileOutputStream fos = new FileOutputStream(ExcelPath);
+		workbook.write(fos);
 	}
 
 }
